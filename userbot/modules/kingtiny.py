@@ -87,9 +87,13 @@ async def _(event):
     os.remove(file)
     os.remove(ik)
 
+
 # Port By Alvin Ganteng/liualvinas
 # king - Userbot
 
-CMD_HELP.update({
-    "tiny": "⚡𝘾𝙈𝘿⚡: `.tiny`\
-    \n↳ : Untuk Memperkecil Sticker."})
+CMD_HELP.update(
+    {
+        "tiny": "⚡𝘾𝙈𝘿⚡: `.tiny`\
+    \n↳ : Untuk Memperkecil Sticker."
+    }
+)

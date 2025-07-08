@@ -17,10 +17,8 @@ async def _(event):
     await event.edit("`Sedang Memprosess...`")
     async with bot.conversation(chat) as conv:
         try:
-            response = conv.wait_event(events.NewMessage(
-                incoming=True,
-                from_users=220112646
-            )
+            response = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=220112646)
             )
             await conv.send_message("/start")
             await asyncio.sleep(1)
@@ -31,11 +29,17 @@ async def _(event):
         except YouBlockedUserError:
             await king.edit("`Mohon buka blokir` @TempMailBot `lalu coba lagi`")
             return
-        await event.edit(f"**KIMTEMPMAIL** ~ `{response.message.message}`\n\n[KLIK DISINI UNTUK VERIFIKASI]({kimuserbot})")
+        await event.edit(
+            f"**KIMTEMPMAIL** ~ `{response.message.message}`\n\n[KLIK DISINI UNTUK VERIFIKASI]({kimuserbot})"
+        )
 
 
 # Kim Ganteng
 # Ported For Kim Userbot From Ultroid
 
-CMD_HELP.update({"tempmail": "**Modules:** __Temp Mail__\n\n⚡𝘾𝙈𝘿⚡: `.tm`"
-                 "\n**Penjelasan:** Mendapatkan Email Gratis Dari Temp Mail"})
+CMD_HELP.update(
+    {
+        "tempmail": "**Modules:** __Temp Mail__\n\n⚡𝘾𝙈𝘿⚡: `.tm`"
+        "\n**Penjelasan:** Mendapatkan Email Gratis Dari Temp Mail"
+    }
+)

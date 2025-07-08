@@ -30,7 +30,9 @@ async def insta(event):
         return
     reply_message = await event.get_reply_message()
     if not reply_message.text:
-        await event.edit("`Mohon Maaf, Saya Membutuhkan Link Media Instagram Untuk Download`")
+        await event.edit(
+            "`Mohon Maaf, Saya Membutuhkan Link Media Instagram Untuk Download`"
+        )
         return
     chat = "@SaveAsBot"
     reply_message.sender
@@ -49,9 +51,7 @@ async def insta(event):
             await event.edit("`Mohon Buka Blokir` @SaveAsbot `Lalu Coba Lagi`")
             return
         if response.text.startswith("Forward"):
-            await event.edit(
-                "Uhmm Sepertinya Private."
-            )
+            await event.edit("Uhmm Sepertinya Private.")
         else:
             await event.delete()
             await event.client.send_file(
@@ -67,5 +67,9 @@ async def insta(event):
 # By King - Userbot
 # Apis Gansssssss Mksh Sma Sma
 # Apis Gans
-CMD_HELP.update({"instagram": "**Modules:** __Instagram__\n\n⚡𝘾𝙈𝘿⚡: `.ig`"
-                 "\n**Penjelasan:** Download Media di Postingan Instagram, Balas ke link instagram ketik `.ig`"})
+CMD_HELP.update(
+    {
+        "instagram": "**Modules:** __Instagram__\n\n⚡𝘾𝙈𝘿⚡: `.ig`"
+        "\n**Penjelasan:** Download Media di Postingan Instagram, Balas ke link instagram ketik `.ig`"
+    }
+)

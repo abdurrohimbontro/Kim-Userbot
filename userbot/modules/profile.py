@@ -3,23 +3,23 @@
 # Licensed under the Raphielscape Public License, Version 1.d (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for changing your Telegram profile details+ now u can steal personal details of user. """
+"""Userbot module for changing your Telegram profile details+ now u can steal personal details of user."""
 
 import os
 
 from telethon.errors import ImageProcessFailedError, PhotoCropSizeSmallError
 
-from telethon.errors.rpcerrorlist import (PhotoExtInvalidError,
-                                          UsernameOccupiedError)
+from telethon.errors.rpcerrorlist import PhotoExtInvalidError, UsernameOccupiedError
 
-from telethon.tl.functions.account import (UpdateProfileRequest,
-                                           UpdateUsernameRequest)
+from telethon.tl.functions.account import UpdateProfileRequest, UpdateUsernameRequest
 
 from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest
 
-from telethon.tl.functions.photos import (DeletePhotosRequest,
-                                          GetUserPhotosRequest,
-                                          UploadProfilePhotoRequest)
+from telethon.tl.functions.photos import (
+    DeletePhotosRequest,
+    GetUserPhotosRequest,
+    UploadProfilePhotoRequest,
+)
 
 from telethon.tl.types import InputPhoto, MessageMediaPhoto, User, Chat, Channel
 from telethon.tl.functions.users import GetFullUserRequest
@@ -39,13 +39,15 @@ BIO_SUCCESS = "```Bio Anda Telah Berhasil Diubah.```"
 
 NAME_OK = "```Nama Anda Telah Berhasil Diubah.```"
 USERNAME_SUCCESS = "```Username Anda Sudah Diubah.```"
-USERNAME_TAKEN = "```Mohon Maaf Tuan Muda, Username Itu Sudah Ada Yang Menggunakannya.```"
+USERNAME_TAKEN = (
+    "```Mohon Maaf Tuan Muda, Username Itu Sudah Ada Yang Menggunakannya.```"
+)
 # ===============================================================
 
 
 @register(outgoing=True, pattern="^.reserved$")
 async def mine(event):
-    """ For .reserved command, get a list of your reserved usernames. """
+    """For .reserved command, get a list of your reserved usernames."""
     result = await bot(GetAdminedPublicChannelsRequest())
     output_str = ""
     for channel_obj in result.chats:
@@ -55,7 +57,7 @@ async def mine(event):
 
 @register(outgoing=True, pattern="^.name")
 async def update_name(name):
-    """ For .name command, change your name in Telegram. """
+    """For .name command, change your name in Telegram."""
     newname = name.text[6:]
     if " " not in newname:
         firstname = newname
@@ -65,20 +67,19 @@ async def update_name(name):
         firstname = namesplit[0]
         lastname = namesplit[1]
 
-    await name.client(
-        UpdateProfileRequest(first_name=firstname, last_name=lastname))
+    await name.client(UpdateProfileRequest(first_name=firstname, last_name=lastname))
     await name.edit(NAME_OK)
 
 
 @register(outgoing=True, pattern="^.setpfp$")
 async def set_profilepic(propic):
-    """ For .profilepic command, change your profile picture in Telegram. """
+    """For .profilepic command, change your profile picture in Telegram."""
     replymsg = await propic.get_reply_message()
     photo = None
     if replymsg.media:
         if isinstance(replymsg.media, MessageMediaPhoto):
             photo = await propic.client.download_media(message=replymsg.photo)
-        elif "image" in replymsg.media.document.mime_type.split('/'):
+        elif "image" in replymsg.media.document.mime_type.split("/"):
             photo = await propic.client.download_file(replymsg.media.document)
         else:
             await propic.edit(INVALID_MEDIA)
@@ -86,8 +87,8 @@ async def set_profilepic(propic):
     if photo:
         try:
             await propic.client(
-                UploadProfilePhotoRequest(await
-                                          propic.client.upload_file(photo)))
+                UploadProfilePhotoRequest(await propic.client.upload_file(photo))
+            )
             os.remove(photo)
             await propic.edit(PP_CHANGED)
         except PhotoCropSizeSmallError:
@@ -100,7 +101,7 @@ async def set_profilepic(propic):
 
 @register(outgoing=True, pattern="^.setbio (.*)")
 async def set_biograph(setbio):
-    """ For .setbio command, set a new bio for your profile in Telegram. """
+    """For .setbio command, set a new bio for your profile in Telegram."""
     newbio = setbio.pattern_match.group(1)
     await setbio.client(UpdateProfileRequest(about=newbio))
     await setbio.edit(BIO_SUCCESS)
@@ -108,7 +109,7 @@ async def set_biograph(setbio):
 
 @register(outgoing=True, pattern="^.username (.*)")
 async def update_username(username):
-    """ For .username command, set a new username in Telegram. """
+    """For .username command, set a new username in Telegram."""
     newusername = username.pattern_match.group(1)
     try:
         await username.client(UpdateUsernameRequest(newusername))
@@ -119,7 +120,7 @@ async def update_username(username):
 
 @register(outgoing=True, pattern="^.count$")
 async def count(event):
-    """ For .count command, get profile stats. """
+    """For .count command, get profile stats."""
     u = 0
     g = 0
     c = 0
@@ -156,9 +157,9 @@ async def count(event):
 
 @register(outgoing=True, pattern=r"^.delpfp")
 async def remove_profilepic(delpfp):
-    """ For .delpfp command, delete your current profile picture in Telegram. """
+    """For .delpfp command, delete your current profile picture in Telegram."""
     group = delpfp.text[8:]
-    if group == 'all':
+    if group == "all":
         lim = 0
     elif group.isdigit():
         lim = int(group)
@@ -166,26 +167,25 @@ async def remove_profilepic(delpfp):
         lim = 1
 
     pfplist = await delpfp.client(
-        GetUserPhotosRequest(user_id=delpfp.from_id,
-                             offset=0,
-                             max_id=0,
-                             limit=lim))
+        GetUserPhotosRequest(user_id=delpfp.from_id, offset=0, max_id=0, limit=lim)
+    )
     input_photos = []
     for sep in pfplist.photos:
         input_photos.append(
-            InputPhoto(id=sep.id,
-                       access_hash=sep.access_hash,
-                       file_reference=sep.file_reference))
+            InputPhoto(
+                id=sep.id,
+                access_hash=sep.access_hash,
+                file_reference=sep.file_reference,
+            )
+        )
     await delpfp.client(DeletePhotosRequest(id=input_photos))
-    await delpfp.edit(
-        f"`Berhasil Menghapus {len(input_photos)} Foto Profil.`")
+    await delpfp.edit(f"`Berhasil Menghapus {len(input_photos)} Foto Profil.`")
 
 
 @register(pattern=".data(?: |$)(.*)", outgoing=True)
 async def who(event):
 
-    await event.edit(
-        "`Mengambil Informasi Data`")
+    await event.edit("`Mengambil Informasi Data`")
 
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
@@ -204,13 +204,15 @@ async def who(event):
         message_id_to_reply = None
 
     try:
-        await event.client.send_file(event.chat_id,
-                                     photo,
-                                     caption=caption,
-                                     link_preview=False,
-                                     force_document=False,
-                                     reply_to=message_id_to_reply,
-                                     parse_mode="html")
+        await event.client.send_file(
+            event.chat_id,
+            photo,
+            caption=caption,
+            link_preview=False,
+            force_document=False,
+            reply_to=message_id_to_reply,
+            parse_mode="html",
+        )
 
         if not photo.startswith("http"):
             os.remove(photo)
@@ -221,11 +223,10 @@ async def who(event):
 
 
 async def get_user(event):
-    """ Get the user from argument or replied message. """
+    """Get the user from argument or replied message."""
     if event.reply_to_msg_id and not event.pattern_match.group(1):
         previous_message = await event.get_reply_message()
-        replied_user = await event.client(
-            GetFullUserRequest(previous_message.from_id))
+        replied_user = await event.client(GetFullUserRequest(previous_message.from_id))
     else:
         user = event.pattern_match.group(1)
 
@@ -239,15 +240,13 @@ async def get_user(event):
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
 
-            if isinstance(probable_user_mention_entity,
-                          MessageEntityMentionName):
+            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
                 user_id = probable_user_mention_entity.user_id
                 replied_user = await event.client(GetFullUserRequest(user_id))
                 return replied_user
         try:
             user_object = await event.client.get_entity(user)
-            replied_user = await event.client(
-                GetFullUserRequest(user_object.id))
+            replied_user = await event.client(GetFullUserRequest(user_object.id))
         except (TypeError, ValueError) as err:
             await event.edit(str(err))
             return None
@@ -256,12 +255,12 @@ async def get_user(event):
 
 
 async def fetch_info(replied_user, event):
-    """ Get details from the User object. """
+    """Get details from the User object."""
     replied_user_profile_photos = await event.client(
-        GetUserPhotosRequest(user_id=replied_user.user.id,
-                             offset=42,
-                             max_id=0,
-                             limit=80))
+        GetUserPhotosRequest(
+            user_id=replied_user.user.id, offset=42, max_id=0, limit=80
+        )
+    )
     replied_user_profile_photos_count = "This gay has no pic."
     try:
         replied_user_profile_photos_count = replied_user_profile_photos.count
@@ -281,16 +280,24 @@ async def fetch_info(replied_user, event):
     is_bot = replied_user.user.bot
     restricted = replied_user.user.restricted
     verified = replied_user.user.verified
-    photo = await event.client.download_profile_photo(user_id,
-                                                      TEMP_DOWNLOAD_DIRECTORY +
-                                                      str(user_id) + ".jpg",
-                                                      download_big=True)
-    first_name = first_name.replace(
-        "\u2060", "") if first_name else ("Orang Ini Tidak Punya Nama Depan")
-    last_name = last_name.replace(
-        "\u2060", "") if last_name else ("Orang Ini Tidak Punya Nama Belakang")
-    username = "@{}".format(username) if username else (
-        "Pengguna Ini Tidak Menggunakan Username")
+    photo = await event.client.download_profile_photo(
+        user_id, TEMP_DOWNLOAD_DIRECTORY + str(user_id) + ".jpg", download_big=True
+    )
+    first_name = (
+        first_name.replace("\u2060", "")
+        if first_name
+        else ("Orang Ini Tidak Punya Nama Depan")
+    )
+    last_name = (
+        last_name.replace("\u2060", "")
+        if last_name
+        else ("Orang Ini Tidak Punya Nama Belakang")
+    )
+    username = (
+        "@{}".format(username)
+        if username
+        else ("Pengguna Ini Tidak Menggunakan Username")
+    )
     user_bio = "Orang Ini Tidak Menggunakan Bio" if not user_bio else user_bio
 
     caption = "<b>Informasi Pengguna:</b>\n\n"
@@ -306,13 +313,14 @@ async def fetch_info(replied_user, event):
     caption += f"Bio: \n<code>{user_bio}</code>\n\n"
     caption += f"Obrolan Umum Untuk Pengguna Ini: {common_chat}\n"
     caption += "Link Permanen Ke Profil: "
-    caption += f"<a href=\"tg://user?id={user_id}\">{first_name}</a>"
+    caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
 
     return photo, caption
 
-CMD_HELP.update({
-    "profil":
-    "⚡𝘾𝙈𝘿⚡`.username` <username baru>\
+
+CMD_HELP.update(
+    {
+        "profil": "⚡𝘾𝙈𝘿⚡`.username` <username baru>\
 \nUsage: Ganti Username Telegram.\
 \n\n⚡𝘾𝙈𝘿⚡`.name` <nama depan> Atau `.name` <Nama Depan> <Nama Belakang>\
 \nUsage: Ganti Nama Telegram Anda\
@@ -328,4 +336,5 @@ CMD_HELP.update({
 \nUsage: Menghitung Grup, Chat, Bot etc...\
 \n\n⚡𝘾𝙈𝘿⚡`.data` <username> Atau Balas Ke Pesan Ketik `.data`\
 \nUsage: Mendapatkan Informasi Pengguna."
-})
+    }
+)

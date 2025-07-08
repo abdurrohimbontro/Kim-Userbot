@@ -26,19 +26,11 @@ async def gps(event):
         lon = geoloc.longitude
         lat = geoloc.latitude
         await reply_to_id.reply(
-            input_str,
-            file=types.InputMediaGeoPoint(
-                types.InputGeoPoint(
-                    lat, lon
-                )
-            )
+            input_str, file=types.InputMediaGeoPoint(types.InputGeoPoint(lat, lon))
         )
         await event.delete()
     else:
         await event.edit("`tuanku Saya Tidak Dapat Menemukannya`")
 
-CMD_HELP.update({
-    "gps":
-    ">⚡𝘾𝙈𝘿⚡`.gps`"
-    "\nUsage: Untuk Mendapatkan Lokasi Map"
-})
+
+CMD_HELP.update({"gps": ">⚡𝘾𝙈𝘿⚡`.gps`" "\nUsage: Untuk Mendapatkan Lokasi Map"})

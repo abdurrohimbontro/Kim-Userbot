@@ -281,9 +281,7 @@ async def resize_photo(photo):
 @register(outgoing=True, pattern=r"^\.stkrinfo$")
 async def get_pack_info(event):
     if not event.is_reply:
-        return await event.edit(
-            "`Mohon Balas Ke Sticker`"
-        )
+        return await event.edit("`Mohon Balas Ke Sticker`")
 
     rep_msg = await event.get_reply_message()
     if not rep_msg.document:
@@ -352,6 +350,7 @@ async def sticker_to_png(sticker):
         else:
             await sticker.delete()
     return
+
 
 # KIM - USERBOT
 
