@@ -89,8 +89,9 @@ async def set_not_afk(event):
         os.system("rm -rf *.jpg")
 
 
-@bot.on(events.NewMessage(incoming=True,
-                          func=lambda e: bool(e.mentioned or e.is_private)))
+@bot.on(
+    events.NewMessage(incoming=True, func=lambda e: bool(e.mentioned or e.is_private))
+)
 async def on_afk(event):
     if event.fwd_from:
         return
@@ -110,12 +111,11 @@ async def on_afk(event):
         msg = None
         if reason:
             message_to_reply = (
-                f"╔══════━━━━━━━═════╗\n**𝚃𝚄𝙰𝙽 𝙼𝚄𝙳𝙰 {ALIVE_NAME} Sedang 𝐀𝐅𝐊**\n**Sejak :** `{total_afk_time}` **Yang Lalu**\n" +
-                f"**◈ Alasan :** `{reason}`\n╚══════━━━━━━━═════╝")
-        else:
-            message_to_reply = (
-                f"╔══════━━━━━━━═════╗\n**Maaf 𝚃𝚄𝙰𝙽 𝙼𝚄𝙳𝙰 {ALIVE_NAME} Sedang 𝐀𝐅𝐊**\n**Sejak :** `{total_afk_time}` **Yang Lalu**\n╚══════━━━━━━━═════╝"
+                f"╔══════━━━━━━━═════╗\n**𝚃𝚄𝙰𝙽 𝙼𝚄𝙳𝙰 {ALIVE_NAME} Sedang 𝐀𝐅𝐊**\n**Sejak :** `{total_afk_time}` **Yang Lalu**\n"
+                + f"**◈ Alasan :** `{reason}`\n╚══════━━━━━━━═════╝"
             )
+        else:
+            message_to_reply = f"╔══════━━━━━━━═════╗\n**Maaf 𝚃𝚄𝙰𝙽 𝙼𝚄𝙳𝙰 {ALIVE_NAME} Sedang 𝐀𝐅𝐊**\n**Sejak :** `{total_afk_time}` **Yang Lalu**\n╚══════━━━━━━━═════╝"
         try:
             if pic.endswith((".tgs", ".webp")):
                 msg = await event.reply(file=pic)
@@ -198,7 +198,8 @@ async def _(event):
                 if pic.endswith((".tgs", ".webp")):
                     await bot.send_message(event.chat_id, file=pic)
                     await bot.send_message(
-                        event.chat_id, f"╔══════━━━━━━━═════╗\n**𝚃𝚄𝙰𝙽 𝙼𝚄𝙳𝙰 {ALIVE_NAME} 𝐓𝐞𝐥𝐚𝐡 𝐀𝐅𝐊**\n╚══════━━━━━━━═════╝"
+                        event.chat_id,
+                        f"╔══════━━━━━━━═════╗\n**𝚃𝚄𝙰𝙽 𝙼𝚄𝙳𝙰 {ALIVE_NAME} 𝐓𝐞𝐥𝐚𝐡 𝐀𝐅𝐊**\n╚══════━━━━━━━═════╝",
                     )
                 else:
                     await bot.send_message(
@@ -207,7 +208,10 @@ async def _(event):
                         file=pic,
                     )
             except BaseException:
-                await bot.send_message(event.chat_id, f"╔══════━━━━━━━═════╗\n**𝚃𝚄𝙰𝙽 𝙼𝚄𝙳𝙰 {ALIVE_NAME} 𝐓𝐞𝐥𝐚𝐡 𝐀𝐅𝐊**\n╚══════━━━━━━━═════╝")
+                await bot.send_message(
+                    event.chat_id,
+                    f"╔══════━━━━━━━═════╗\n**𝚃𝚄𝙰𝙽 𝙼𝚄𝙳𝙰 {ALIVE_NAME} 𝐓𝐞𝐥𝐚𝐡 𝐀𝐅𝐊**\n╚══════━━━━━━━═════╝",
+                )
         await event.delete()
         try:
             if reason and pic:

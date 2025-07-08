@@ -23,13 +23,8 @@ from .exceptions import CancelProcess
 
 
 async def progress(
-        current,
-        total,
-        gdrive,
-        start,
-        prog_type,
-        file_name=None,
-        is_cancelled=False):
+    current, total, gdrive, start, prog_type, file_name=None, is_cancelled=False
+):
     now = time.time()
     diff = now - start
     if is_cancelled is True:

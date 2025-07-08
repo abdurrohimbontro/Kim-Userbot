@@ -1,4 +1,5 @@
-""" Userbot module for other small commands. """
+"""Userbot module for other small commands."""
+
 from userbot import CMD_HELP, ALIVE_NAME
 from userbot.events import register
 
@@ -16,7 +17,8 @@ async def usit(e):
         "═⎆ Pemilik : [🍁𝐊𝐈𝐌🍁](t.me/warga_pati) \n"
         "═⎆ Repo    : [Repo](https://github.com/abdurrohimbontro/Kim-Userbot) \n"
         "═⎆ Instragam : [Instagram ✍️𝐊𝐈𝐌✍️](Instagram.com/Kim_) \n"
-        "═⎆ Grup Random : [Grup random](https://t.me/crazy_people345)")
+        "═⎆ Grup Random : [Grup random](https://t.me/crazy_people345)"
+    )
 
 
 @register(outgoing=True, pattern="^.vars$")
@@ -24,7 +26,8 @@ async def var(m):
     await m.edit(
         f"      ╔════════════╗\n  ✍️𝘿𝘼𝙁𝙏𝘼𝙍 𝙑𝘼𝙍𝙎✍️     \n╚════════════╝ \n"
         f"**Disini Daftar Vars Dari Tuan {DEFAULTUSER}:**\n"
-        "═⎆ Daftar Vars : [DAFTAR VARS](https://raw.githubusercontent.com/abdurrohimbontro/Kim-Userbot/Kim-Userbot/varshelper.txt)")
+        "═⎆ Daftar Vars : [DAFTAR VARS](https://raw.githubusercontent.com/abdurrohimbontro/Kim-Userbot/Kim-Userbot/varshelper.txt)"
+    )
 
 
 CMD_HELP.update(

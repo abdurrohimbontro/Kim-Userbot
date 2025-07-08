@@ -3,7 +3,7 @@
 # Licensed under the Raphielscape Public License, Version 1.d (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for getting information about the server. """
+"""Userbot module for getting information about the server."""
 
 from platform import uname
 
@@ -26,8 +26,10 @@ async def amireallydbs(dbs):
         db = "Redis Cache seems to be failing!"
     else:
         db = "Databases functioning normally!"
-    await dbs.edit(""
-                   f"**User:** `{DEFAULTUSER}` \n"
-                   f"**Status Database:** `{db}`\n"
-                   f"**Kim-Userbot:** `{BOT_VER}`"
-                   "")
+    await dbs.edit(
+        ""
+        f"**User:** `{DEFAULTUSER}` \n"
+        f"**Status Database:** `{db}`\n"
+        f"**Kim-Userbot:** `{BOT_VER}`"
+        ""
+    )

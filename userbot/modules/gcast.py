@@ -5,6 +5,7 @@
 
 from userbot.events import register
 from userbot import CMD_HELP, bot
+
 # Apis Ganteng
 
 
@@ -26,7 +27,10 @@ async def gcast(event):
                 await bot.send_message(chat, msg)
             except BaseException:
                 er += 1
-    await kk.edit(f"**Berhasil Mengirim Pesan Ke** `{done}` **Grup, Gagal Mengirim Pesan Ke** `{er}` **Grup**")
+    await kk.edit(
+        f"**Berhasil Mengirim Pesan Ke** `{done}` **Grup, Gagal Mengirim Pesan Ke** `{er}` **Grup**"
+    )
+
 
 # Apis Ganteng
 CMD_HELP.update(

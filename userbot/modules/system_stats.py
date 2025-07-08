@@ -3,7 +3,7 @@
 # Licensed under the Raphielscape Public License, Version 1.d (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for getting information about the server. """
+"""Userbot module for getting information about the server."""
 
 
 import asyncio
@@ -18,7 +18,16 @@ import sys
 import time
 from datetime import datetime
 import psutil
-from userbot import ALIVE_LOGO, ALIVE_NAME, BOT_VER, CMD_HELP, KING_TEKS_KUSTOM, StartTime, UPSTREAM_REPO_BRANCH, bot
+from userbot import (
+    ALIVE_LOGO,
+    ALIVE_NAME,
+    BOT_VER,
+    CMD_HELP,
+    KING_TEKS_KUSTOM,
+    StartTime,
+    UPSTREAM_REPO_BRANCH,
+    bot,
+)
 from userbot.events import register
 
 
@@ -38,9 +47,7 @@ async def get_readable_time(seconds: int) -> str:
 
     while count < 4:
         count += 1
-        remainder, result = divmod(
-            seconds, 60) if count < 3 else divmod(
-            seconds, 24)
+        remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
         if seconds == 0 and remainder == 0:
             break
         time_list.append(int(result))
@@ -72,10 +79,8 @@ async def psu(event):
     softw += f"`Waktu Hidup: {bt.day}/{bt.month}/{bt.year}  {bt.hour}:{bt.minute}:{bt.second}`\n"
     # CPU Cores
     cpuu = "**Informasi CPU**\n"
-    cpuu += "`Physical cores   : " + \
-        str(psutil.cpu_count(logical=False)) + "`\n"
-    cpuu += "`Total cores      : " + \
-        str(psutil.cpu_count(logical=True)) + "`\n"
+    cpuu += "`Physical cores   : " + str(psutil.cpu_count(logical=False)) + "`\n"
+    cpuu += "`Total cores      : " + str(psutil.cpu_count(logical=True)) + "`\n"
     # CPU frequencies
     cpufreq = psutil.cpu_freq()
     cpuu += f"`Max Frequency    : {cpufreq.max:.2f}Mhz`\n"
@@ -128,8 +133,7 @@ async def sysdetails(sysd):
             )
 
             stdout, stderr = await fetch.communicate()
-            result = str(stdout.decode().strip()) + \
-                str(stderr.decode().strip())
+            result = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
             await sysd.edit("`" + result + "`")
         except FileNotFoundError:
@@ -240,7 +244,8 @@ async def amireallyalive(alive):
         f"╟[•🐲 `Python   :`Ver {python_version()} \n"
         f"╟[•🦾 `Bot Ver  :`{BOT_VER} \n"
         f"╟[•🗃️ `Plugins  :`{len(modules)} \n"
-        f"╚═══════════════════════")
+        f"╚═══════════════════════"
+    )
     if ALIVE_LOGO:
         try:
             logo = ALIVE_LOGO
@@ -281,7 +286,8 @@ async def amireallyalive(alive):
         f"◈ **REPO   :** [Kim-Userbot](https://github.com/abdurrohimbontro/Kim-Userbot) \n"
         f"◈ **TEAM   :** [Grup Random](https://t.me/crazy_people345) \n"
         f"◈ **Tuan Muda BY :** {DEFAULTUSER} \n"
-        f"━━━━━━━━━━━━━━━━━━━━━╯")
+        f"━━━━━━━━━━━━━━━━━━━━━╯"
+    )
     if ALIVE_LOGO:
         try:
             logo = ALIVE_LOGO
@@ -367,7 +373,8 @@ async def redis(alive):
         f"│    **emang ga jelas.** \n"
         f"╰╼════════════════════╾╯ \n"
         f"| [Repo](https://abdurrohimbontro.github.io/Kim-Userbot) | [Grup Random](t.me/crazy_people345) | "
-        f"[Pemilik](t.me/warga_pati)")
+        f"[Pemilik](t.me/warga_pati)"
+    )
     if ALIVE_LOGO:
         try:
             logo = ALIVE_LOGO
@@ -390,7 +397,7 @@ async def redis(alive):
 
 @register(outgoing=True, pattern="^.aliveu")
 async def amireallyaliveuser(username):
-    """ For .aliveu command, change the username in the .alive command. """
+    """For .aliveu command, change the username in the .alive command."""
     message = username.text
     output = ".aliveu [new username] tidak boleh kosong"
     if not (message == ".aliveu" and message[7:8] != " "):

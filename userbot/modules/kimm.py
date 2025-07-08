@@ -34,7 +34,7 @@ async def koc(e):
         await e.edit("SAYANG KAMU💞")
 
 
-@register(outgoing=True, pattern='^.dino(?: |$)(.*)')
+@register(outgoing=True, pattern="^.dino(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("`DIN DINNN.....`")
@@ -349,7 +349,7 @@ async def koc(e):
         await e.edit("`HDEEH LEMEESSS`")
 
 
-@register(outgoing=True, pattern='^.terkadang(?: |$)(.*)')
+@register(outgoing=True, pattern="^.terkadang(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     await typew.edit("`uy uhtea`")
@@ -363,6 +363,8 @@ async def typewriter(typew):
     await typew.edit("`biar jadi lopyu 3000`")
     sleep(1)
     await typew.edit("`kwkwkkwk😉`")
+
+
 # Create by myself @localheart
 
 
@@ -400,7 +402,8 @@ async def _(event):
             "`Mengirim Cintaku.. 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `",
             "`Mengirim Cintaku.. 84%\n█████████████████████▒▒▒▒ `",
             "`Mengirim Cintaku.. 100%\n█████████CINTAKU███████████ `",
-            f"`Cintaku Sekarang Sepenuhnya Terkirim ke kamu, Dan Sekarang Aku Sangat Mencintai Mu, I Love You 💞`"]
+            f"`Cintaku Sekarang Sepenuhnya Terkirim ke kamu, Dan Sekarang Aku Sangat Mencintai Mu, I Love You 💞`",
+        ]
 
         for i in animation_ttl:
 
@@ -409,7 +412,7 @@ async def _(event):
             await event.edit(animation_chars[i % 11])
 
 
-@register(outgoing=True, pattern='^.gombal(?: |$)(.*)')
+@register(outgoing=True, pattern="^.gombal(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1)
@@ -432,11 +435,13 @@ async def typewriter(typew):
     await typew.edit("`I LOVEE YOUUUU💘💓`")
     sleep(1)
     await typew.edit("`Tapi Bo'ong`")
+
+
 # Create by myself @localheart
 
-CMD_HELP.update({
-    "gabut":
-    "⚡𝘾𝙈𝘿⚡`.gabut` ;⚡𝘾𝙈𝘿⚡ `.dino`\
+CMD_HELP.update(
+    {
+        "gabut": "⚡𝘾𝙈𝘿⚡`.gabut` ;⚡𝘾𝙈𝘿⚡ `.dino`\
     \nPenjelasan: ntahlah gabut doang.\
     \n\n⚡𝘾𝙈𝘿⚡`.gombal`\
     \nPenjelasan: buat bercanda\
@@ -446,4 +451,5 @@ CMD_HELP.update({
     \nPenjelasan: untuk jadi buaya.\
     \n\n⚡𝘾𝙈𝘿⚡`.terkadang`\
     \nPenjelasan: Auk dah iseng doang."
-})
+    }
+)

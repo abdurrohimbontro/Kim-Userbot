@@ -17,6 +17,7 @@ async def _(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
+
 # Apis Gans
 
 
@@ -31,6 +32,7 @@ async def _(event):
     tap = await bot.inline_query(botusername, wwwspr)
     await tap[0].click(event.chat_id)
     await event.delete()
+
 
 # Apis Gans
 
@@ -47,13 +49,17 @@ async def _(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
+
 # Ported For King-Userbot By PacarFerdilla/Apis
 
-CMD_HELP.update({
-    "kingfun": "\
+CMD_HELP.update(
+    {
+        "kingfun": "\
 `.xogame`\
 \nUsage: Mainkan game XO bersama temanmu.\
 \n\n`.mod <nama app>`\
 \nUsage: Dapatkan applikasi mod\
 \n\n`.wp <teks> <username/ID>`\
-\nUsage: Berikan pesan rahasia"})
+\nUsage: Berikan pesan rahasia"
+    }
+)

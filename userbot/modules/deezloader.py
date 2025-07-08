@@ -21,8 +21,7 @@ from userbot.events import register
 # KING USERBOT
 
 
-@register(outgoing=True,
-          pattern=r"^\.deez (.+?|) (FLAC|MP3\_320|MP3\_256|MP3\_128)")
+@register(outgoing=True, pattern=r"^\.deez (.+?|) (FLAC|MP3\_320|MP3\_256|MP3\_128)")
 async def _(event):
     """DeezLoader by @An0nimia
     Ported for UniBorg by @SpEcHlDe"""
@@ -125,6 +124,7 @@ async def _(event):
     else:
         await event.edit(strings["wrong_cmd_syntax"])
 
+
 # LORD - USERBOT
 
 
@@ -162,10 +162,13 @@ async def upload_track(track_location, message):
     )
     os.remove(track_location)
 
+
 # LORD USERBOT
 # @LORDUSERBOT_GROUP
 CMD_HELP.update(
     {
         "deezload": "**Modules:** __Deezload__\n\n⚡𝘾𝙈𝘿⚡: `.deez <spotify/deezer link> <Format>`"
         "\n**Penjelasan:** Unduh musik dari deezer."
-        "\n\n *Format= `FLAC`, `MP3_320`, `MP3_256`, `MP3_128`."})
+        "\n\n *Format= `FLAC`, `MP3_320`, `MP3_256`, `MP3_128`."
+    }
+)
